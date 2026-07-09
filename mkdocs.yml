@@ -1,0 +1,18 @@
+site_name: Documentacion de Ansible
+site_description: Guia y capacitacion de Ansible
+site_author: Equipo de capacitacion
+
+theme:
+  name: material
+  language: es
+  features:
+    - navigation.sections
+    - navigation.top
+    - search.suggest
+    - content.code.copy
+
+nav:
+  - Inicio: index.md
+  - Sesiones:
+      - Indice: sesiones/index.md
+      - Sesion 0 - Requirements del laboratorio: sesiones/sesion-0.md
