@@ -13,3 +13,4 @@ Proyecto inicializado. El contenido de la guia se agregara en las siguientes tar
 ## Primer contenido disponible
 
 - [Sesion 0 - Requirements del laboratorio](sesiones/sesion-0.md)
+- [Sesion 1 - Fundamentos de Infraestructura como Codigo](sesiones/sesion-1.md)
