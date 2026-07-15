@@ -28,16 +28,25 @@ docker ps
 
 ---
 
-## 2. Acceder al nodo de control
+## 2. Validar la máquina host como nodo de control
+
+La máquina host será el nodo de control desde donde se ejecutará Ansible. Activar el virtual environment creado en la sesión 0:
 
 ```bash
-docker exec -it ansible-control bash
+source .venv-ansible/bin/activate
 ```
 
+Aunque en esta sesión no ejecutaremos automatizaciones con Ansible, validaremos que el comando está disponible en el entorno local:
+
 ```bash
-cat /etc/os-release
-hostname
-hostname -I
+which ansible
+ansible --version
+```
+
+La ruta esperada debe apuntar al virtual environment:
+
+```text
+.venv-ansible/bin/ansible
 ```
 
 ---

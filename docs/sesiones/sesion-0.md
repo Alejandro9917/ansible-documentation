@@ -13,23 +13,24 @@ En esta primera etapa no se instalarán servicios como Redis ni software adicion
 Para evitar el uso de máquinas virtuales completas, utilizaremos contenedores Docker como pequeños servidores Ubuntu.
 
 ```text
+Máquina host
 Ansible Control Node
         |
-        | SSH
+        | SSH hacia puertos locales
         |
 +----------------+
 | Ubuntu Server  |
-| device01       |
+| device01:2221  |
 +----------------+
 
 +----------------+
 | Ubuntu Server  |
-| device02       |
+| device02:2222  |
 +----------------+
 
 +----------------+
 | Ubuntu Server  |
-| device03       |
+| device03:2223  |
 +----------------+
 ```
 
@@ -66,13 +67,13 @@ Antes de iniciar los laboratorios, cada participante debe tener instalado:
 
 Antes de validar el entorno, cada participante debe instalar los componentes base que se utilizarán durante el laboratorio.
 
-### Instalar Python 3 y pip
+### Instalar Python 3, pip y venv
 
 #### Ubuntu o Debian
 
 ```bash
 sudo apt update
-sudo apt install -y python3 python3-pip
+sudo apt install -y python3 python3-pip python3-venv
 ```
 
 #### macOS
@@ -87,27 +88,42 @@ Ejecutar dentro de la distribución Linux instalada en WSL2:
 
 ```bash
 sudo apt update
-sudo apt install -y python3 python3-pip
+sudo apt install -y python3 python3-pip python3-venv
 ```
 
-### Instalar Ansible
+### Instalar Ansible en un virtual environment
 
-Ansible se instalará con `pip` para mantener una instalación simple y reproducible:
+Ansible se instalará dentro de un entorno virtual para evitar dependencias globales en el sistema operativo.
+
+Crear el entorno virtual:
 
 ```bash
-python3 -m pip install --user ansible
+python3 -m venv .venv-ansible
 ```
 
-Validar que el directorio local de binarios de Python esté disponible en el `PATH`:
+Activar el entorno virtual:
 
 ```bash
-python3 -m site --user-base
+source .venv-ansible/bin/activate
 ```
 
-Si `ansible` no queda disponible después de la instalación, agregar el directorio `bin` del usuario al `PATH`. En Linux o macOS normalmente es:
+Actualizar `pip` e instalar Ansible:
 
 ```bash
-export PATH="$HOME/.local/bin:$PATH"
+python -m pip install --upgrade pip
+python -m pip install ansible
+```
+
+Validar la instalación:
+
+```bash
+ansible --version
+```
+
+Cuando se termine de trabajar, el entorno virtual se puede desactivar con:
+
+```bash
+deactivate
 ```
 
 ### Instalar Docker y Docker Compose
@@ -146,6 +162,8 @@ docker --version
 docker compose version
 python3 --version
 pip3 --version
+python3 -m venv --help
+source .venv-ansible/bin/activate
 ansible --version
 ```
 
@@ -186,7 +204,6 @@ Para los primeros laboratorios únicamente se utilizarán servidores Ubuntu:
 
 | Contenedor | Rol |
 |---|---|
-| ansible-control | Nodo de control para ejecutar Ansible |
 | device01 | Servidor Ubuntu administrado |
 | device02 | Servidor Ubuntu administrado |
 | device03 | Servidor Ubuntu administrado |
@@ -199,7 +216,7 @@ Más adelante se podrán agregar otros servicios como Redis, monitoreo o softwar
 
 Al finalizar esta preparación, se espera contar con:
 
-- Un nodo de control con Ansible instalado.
+- La máquina host funcionando como nodo de control con Ansible instalado.
 - Tres contenedores Ubuntu Server accesibles por SSH.
 - Un inventario básico de Ansible.
 - Conectividad validada entre el nodo de control y los hosts administrados.
@@ -211,45 +228,42 @@ Al finalizar esta preparación, se espera contar con:
 
 ```text
 1. Crear la estructura del laboratorio
-2. Crear el archivo docker-compose.yml
-3. Levantar los contenedores Ubuntu
-4. Validar que los contenedores estén activos
-5. Probar conectividad SSH
-6. Crear o validar el inventory de Ansible
-7. Ejecutar el primer ping de Ansible
+2. Crear la llave SSH del laboratorio
+3. Crear el archivo docker-compose.yml
+4. Levantar los contenedores Ubuntu
+5. Validar que los contenedores estén activos
+6. Probar conectividad SSH desde la máquina host
+7. Crear o validar el inventory de Ansible
+8. Ejecutar el primer ping de Ansible
 ```
 
 ---
 
 ## Docker Compose del laboratorio
 
+Antes de crear o ejecutar el `docker-compose.yml`, se debe preparar la llave SSH del laboratorio dentro de la carpeta de la capacitación.
+
+Desde la raíz del proyecto del laboratorio:
+
+```bash
+mkdir -p ssh
+ssh-keygen -t rsa -b 4096 -f ssh/ansible_lab -N ""
+chmod 600 ssh/ansible_lab
+ls -l ssh/ansible_lab ssh/ansible_lab.pub
+```
+
+El archivo que Docker Compose necesita encontrar es:
+
+```text
+ssh/ansible_lab.pub
+```
+
+Ese archivo será montado dentro de cada contenedor mediante un bind mount. Si `ssh/ansible_lab.pub` no existe antes de levantar los contenedores, los devices no podrán copiar la llave pública a `authorized_keys` y la conexión SSH desde Ansible fallará.
+
 Crear el archivo `docker-compose.yml` en la raíz del laboratorio con el siguiente contenido:
 
 ```yaml
 services:
-  ansible-control:
-    image: ubuntu:24.04
-    container_name: ansible-control
-    hostname: ansible-control
-    command: >
-      bash -lc "
-      apt-get update &&
-      apt-get install -y ansible openssh-client python3 sudo &&
-      useradd -m -s /bin/bash ansible || true &&
-      mkdir -p /home/ansible/.ssh /shared &&
-      if [ ! -f /shared/id_rsa ]; then ssh-keygen -t rsa -b 4096 -f /shared/id_rsa -N ''; fi &&
-      cp /shared/id_rsa /home/ansible/.ssh/id_rsa &&
-      cp /shared/id_rsa.pub /home/ansible/.ssh/id_rsa.pub &&
-      chown -R ansible:ansible /home/ansible/.ssh &&
-      chmod 700 /home/ansible/.ssh &&
-      chmod 600 /home/ansible/.ssh/id_rsa &&
-      tail -f /dev/null
-      "
-    volumes:
-      - ansible-ssh:/shared
-    networks:
-      - ansible-lab
-
   device01:
     image: ubuntu:24.04
     container_name: device01
@@ -261,15 +275,16 @@ services:
       useradd -m -s /bin/bash ansible || true &&
       echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
       mkdir -p /var/run/sshd /home/ansible/.ssh &&
-      until [ -f /shared/id_rsa.pub ]; do sleep 1; done &&
-      cp /shared/id_rsa.pub /home/ansible/.ssh/authorized_keys &&
+      cp /tmp/ansible_lab.pub /home/ansible/.ssh/authorized_keys &&
       chown -R ansible:ansible /home/ansible/.ssh &&
       chmod 700 /home/ansible/.ssh &&
       chmod 600 /home/ansible/.ssh/authorized_keys &&
       /usr/sbin/sshd -D
       "
+    ports:
+      - "2221:22"
     volumes:
-      - ansible-ssh:/shared
+      - ./ssh/ansible_lab.pub:/tmp/ansible_lab.pub:ro
     networks:
       - ansible-lab
 
@@ -284,15 +299,16 @@ services:
       useradd -m -s /bin/bash ansible || true &&
       echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
       mkdir -p /var/run/sshd /home/ansible/.ssh &&
-      until [ -f /shared/id_rsa.pub ]; do sleep 1; done &&
-      cp /shared/id_rsa.pub /home/ansible/.ssh/authorized_keys &&
+      cp /tmp/ansible_lab.pub /home/ansible/.ssh/authorized_keys &&
       chown -R ansible:ansible /home/ansible/.ssh &&
       chmod 700 /home/ansible/.ssh &&
       chmod 600 /home/ansible/.ssh/authorized_keys &&
       /usr/sbin/sshd -D
       "
+    ports:
+      - "2222:22"
     volumes:
-      - ansible-ssh:/shared
+      - ./ssh/ansible_lab.pub:/tmp/ansible_lab.pub:ro
     networks:
       - ansible-lab
 
@@ -307,31 +323,135 @@ services:
       useradd -m -s /bin/bash ansible || true &&
       echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible &&
       mkdir -p /var/run/sshd /home/ansible/.ssh &&
-      until [ -f /shared/id_rsa.pub ]; do sleep 1; done &&
-      cp /shared/id_rsa.pub /home/ansible/.ssh/authorized_keys &&
+      cp /tmp/ansible_lab.pub /home/ansible/.ssh/authorized_keys &&
       chown -R ansible:ansible /home/ansible/.ssh &&
       chmod 700 /home/ansible/.ssh &&
       chmod 600 /home/ansible/.ssh/authorized_keys &&
       /usr/sbin/sshd -D
       "
+    ports:
+      - "2223:22"
     volumes:
-      - ansible-ssh:/shared
+      - ./ssh/ansible_lab.pub:/tmp/ansible_lab.pub:ro
     networks:
       - ansible-lab
-
-volumes:
-  ansible-ssh:
 
 networks:
   ansible-lab:
     driver: bridge
 ```
 
-Este archivo crea un nodo de control con Ansible instalado y tres servidores Ubuntu administrados con SSH y Python 3.
+Este archivo crea tres servidores Ubuntu administrados con SSH y Python 3. La máquina host ejecutará Ansible y se conectará a los contenedores por los puertos locales `2221`, `2222` y `2223`.
+
+### Por qué se utilizan estos comandos
+
+El bloque `command` permite preparar cada contenedor cuando inicia. Como estamos usando la imagen base `ubuntu:24.04`, el contenedor arranca con un sistema mínimo y necesita instalar las herramientas requeridas para el laboratorio.
+
+En `device01`, `device02` y `device03` se ejecutan estos pasos:
+
+| Comando | Propósito |
+|---|---|
+| `apt-get update` | Actualiza el índice de paquetes disponibles dentro del contenedor. |
+| `apt-get install -y openssh-server python3 sudo` | Instala servidor SSH, Python para los módulos de Ansible y sudo. |
+| `useradd -m -s /bin/bash ansible \|\| true` | Crea el usuario remoto que Ansible utilizará para conectarse. |
+| `echo 'ansible ALL=(ALL) NOPASSWD:ALL' > /etc/sudoers.d/ansible` | Permite que el usuario `ansible` ejecute tareas con privilegios sin pedir contraseña. |
+| `mkdir -p /var/run/sshd /home/ansible/.ssh` | Crea los directorios necesarios para SSH y las llaves del usuario. |
+| `cp /tmp/ansible_lab.pub .../authorized_keys` | Autoriza la llave pública generada en la máquina host para permitir acceso SSH. |
+| `/usr/sbin/sshd -D` | Inicia el servidor SSH en primer plano para mantener el contenedor activo. |
+
+Cada contenedor también publica su puerto SSH interno `22` hacia un puerto distinto de la máquina host:
+
+| Contenedor | Puerto del contenedor | Puerto en la máquina host |
+|---|---:|---:|
+| `device01` | `22` | `2221` |
+| `device02` | `22` | `2222` |
+| `device03` | `22` | `2223` |
+
+Esto permite que Ansible se ejecute desde la máquina host y se conecte a cada servidor usando `127.0.0.1` con un puerto diferente.
+
+### Por qué se usa una network
+
+La sección `networks` crea una red Docker llamada `ansible-lab`:
+
+```yaml
+networks:
+  ansible-lab:
+    driver: bridge
+```
+
+Esta red permite que los contenedores se comuniquen entre sí de forma aislada del resto del equipo. Todos los servicios están conectados a esa red:
+
+```yaml
+networks:
+  - ansible-lab
+```
+
+Docker también proporciona resolución DNS interna dentro de la red. Aunque Ansible se ejecutará desde la máquina host usando puertos publicados, mantener una red explícita permite que los contenedores queden agrupados y aislados como parte del mismo laboratorio.
+
+El beneficio principal es que el laboratorio queda reproducible y separado de otros contenedores que puedan existir en el equipo.
+
+### Por qué se monta la llave pública
+
+Cada device monta la llave pública generada en la máquina host antes de iniciar los contenedores:
+
+```yaml
+volumes:
+  - ./ssh/ansible_lab.pub:/tmp/ansible_lab.pub:ro
+```
+
+Este bind mount toma el archivo local `./ssh/ansible_lab.pub` y lo presenta dentro del contenedor como `/tmp/ansible_lab.pub` en modo solo lectura.
+
+En este laboratorio se usa para instalar la llave pública dentro de cada servidor:
+
+- La máquina host genera `ssh/ansible_lab` y `ssh/ansible_lab.pub`.
+- Docker Compose monta `ssh/ansible_lab.pub` como `/tmp/ansible_lab.pub` en cada device.
+- Los servidores `device01`, `device02` y `device03` leen `/tmp/ansible_lab.pub` al iniciar.
+- Cada servidor copia esa llave pública a `authorized_keys`.
+
+Esto permite que la máquina host se conecte por SSH a los servidores sin contraseñas usando la llave privada `ssh/ansible_lab`.
 
 ---
 
 ## Comandos base del laboratorio
+
+### Crear la llave SSH del laboratorio
+
+Antes de levantar los contenedores, crear una llave RSA que usará la máquina host para conectarse a los devices por SSH.
+
+Estos comandos deben ejecutarse desde la raíz de la carpeta de la capacitación, en el mismo nivel donde estará el archivo `docker-compose.yml`.
+
+Crear el directorio donde se guardarán las llaves:
+
+```bash
+mkdir -p ssh
+```
+
+Generar la llave RSA del laboratorio:
+
+```bash
+ssh-keygen -t rsa -b 4096 -f ssh/ansible_lab -N ""
+```
+
+Ajustar permisos de la llave privada:
+
+```bash
+chmod 600 ssh/ansible_lab
+```
+
+Validar que se crearon los dos archivos:
+
+```bash
+ls -l ssh/ansible_lab ssh/ansible_lab.pub
+```
+
+Los archivos generados tienen propósitos distintos:
+
+| Archivo | Uso |
+|---|---|
+| `ssh/ansible_lab` | Llave privada. La usa Ansible desde la máquina host para conectarse por SSH. |
+| `ssh/ansible_lab.pub` | Llave pública. Docker Compose la monta dentro de cada device y la copia a `authorized_keys`. |
+
+El archivo `ssh/ansible_lab.pub` será montado dentro de cada contenedor y agregado a `authorized_keys`. La llave privada `ssh/ansible_lab` nunca debe copiarse dentro de los contenedores ni subirse al repositorio.
 
 ### Levantar contenedores
 
@@ -345,21 +465,26 @@ docker compose up -d
 docker ps
 ```
 
-### Acceder al nodo de control
+### Probar conectividad SSH desde la máquina host
+
+Validar que la máquina host puede conectarse a cada device usando la llave privada del laboratorio:
 
 ```bash
-docker exec -it ansible-control bash
+ssh -i ssh/ansible_lab -p 2221 ansible@127.0.0.1 hostname
+ssh -i ssh/ansible_lab -p 2222 ansible@127.0.0.1 hostname
+ssh -i ssh/ansible_lab -p 2223 ansible@127.0.0.1 hostname
 ```
 
-### Validar Ansible desde el nodo de control
+### Validar Ansible desde la máquina host
 
 ```bash
+source .venv-ansible/bin/activate
 ansible --version
 ```
 
 ### Crear el inventory inicial
 
-Dentro del contenedor `ansible-control`, crear el directorio `inventory`:
+Desde la máquina host, crear el directorio `inventory`:
 
 ```bash
 mkdir -p inventory
@@ -369,13 +494,13 @@ Crear el archivo `inventory/lab.ini` con el siguiente contenido:
 
 ```ini
 [devices]
-device01
-device02
-device03
+device01 ansible_host=127.0.0.1 ansible_port=2221
+device02 ansible_host=127.0.0.1 ansible_port=2222
+device03 ansible_host=127.0.0.1 ansible_port=2223
 
 [all:vars]
 ansible_user=ansible
-ansible_ssh_private_key_file=/home/ansible/.ssh/id_rsa
+ansible_ssh_private_key_file=ssh/ansible_lab
 ansible_python_interpreter=/usr/bin/python3
 ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 ```
@@ -384,15 +509,15 @@ ansible_ssh_common_args='-o StrictHostKeyChecking=no'
 
 En este laboratorio no se configurarán IPs fijas manualmente. Docker Compose crea la red `ansible-lab` y asigna una IP privada a cada contenedor dentro de esa red.
 
-Los hosts se declaran en el inventory usando los nombres de los contenedores:
+Como Ansible se ejecuta desde la máquina host, la conexión se hará usando `127.0.0.1` y los puertos publicados por Docker:
 
-| Host en Ansible | Contenedor Docker | Resolución dentro de la red |
+| Host en Ansible | Contenedor Docker | Dirección usada por Ansible |
 |---|---|---|
-| device01 | device01 | Docker DNS |
-| device02 | device02 | Docker DNS |
-| device03 | device03 | Docker DNS |
+| device01 | device01 | `127.0.0.1:2221` |
+| device02 | device02 | `127.0.0.1:2222` |
+| device03 | device03 | `127.0.0.1:2223` |
 
-Cuando Ansible se ejecuta desde `ansible-control`, los nombres `device01`, `device02` y `device03` se resuelven automáticamente a sus IPs internas porque todos los contenedores están conectados a la misma red Docker.
+Cada puerto local redirige al puerto `22` del contenedor correspondiente.
 
 Para consultar la IP asignada por Docker a un contenedor:
 
@@ -400,7 +525,7 @@ Para consultar la IP asignada por Docker a un contenedor:
 docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}}{{end}}' device01
 ```
 
-No se recomienda depender de esas IPs para el laboratorio, porque pueden cambiar si los contenedores se eliminan y se vuelven a crear. La referencia estable será el nombre del contenedor.
+No se recomienda depender de esas IPs para el laboratorio, porque pueden cambiar si los contenedores se eliminan y se vuelven a crear. La referencia estable para Ansible será `127.0.0.1` más el puerto publicado de cada device.
 
 ### Ejecutar prueba de conectividad
 
@@ -450,7 +575,8 @@ Revisar:
 - Que el usuario SSH exista.
 - Que las llaves SSH estén configuradas.
 - Que el inventory tenga los nombres correctos.
-- Que todos los contenedores estén en la misma red Docker.
+- Que los puertos `2221`, `2222` y `2223` estén publicados correctamente.
+- Que no exista otro proceso usando esos puertos en la máquina host.
 
 ### Error de Python en los hosts
 
