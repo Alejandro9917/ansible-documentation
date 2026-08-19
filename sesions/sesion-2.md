@@ -137,6 +137,21 @@ ansible all -i inventory/lab.ini -m command -a "hostname -I"
 ansible all -i inventory/lab.ini -b -m file -a "path=/tmp/demo state=directory"
 ```
 
+## Explicación de los parámetros
+
+| Parámetro | Función |
+|---|---|
+| `ansible` | Ejecuta la herramienta de línea de comandos de Ansible. |
+| `all` | Indica que el comando se ejecutará sobre todos los hosts definidos en el inventario. |
+| `-i inventory/lab.ini` | Define el archivo de inventario que contiene los hosts administrados y sus variables de conexión. |
+| `-b` | Activa `become`, es decir, ejecuta la tarea con privilegios elevados en el host remoto. |
+| `-m file` | Indica que se usará el módulo `file`, utilizado para administrar archivos, directorios y enlaces. |
+| `-a "..."` | Envía argumentos al módulo seleccionado. |
+| `path=/tmp/demo` | Define la ruta que se desea administrar en los hosts remotos. |
+| `state=directory` | Declara el estado deseado: la ruta debe existir como directorio. |
+
+En conjunto, este comando indica a Ansible que cree el directorio `/tmp/demo` en todos los devices del inventario. Si el directorio ya existe, Ansible no lo vuelve a crear y reporta `ok`.
+
 ## ¿Qué hace?
 
 Permite crear, eliminar o modificar archivos y directorios.
