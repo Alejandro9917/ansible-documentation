@@ -1,0 +1,1207 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Guia y capacitacion de Ansible">
+      
+      
+        <meta name="author" content="Equipo de capacitacion">
+      
+      
+      
+        <link rel="prev" href="../sesion-3/">
+      
+      
+        <link rel="next" href="../sesion-5/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesion 4 - Modulos y ejecucion de tareas - Documentacion de Ansible</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-4-modulos-y-ejecucion-de-tareas" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Documentacion de Ansible" class="md-header__button md-logo" aria-label="Documentacion de Ansible" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentacion de Ansible
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesion 4 - Modulos y ejecucion de tareas
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentacion de Ansible" class="md-nav__button md-logo" aria-label="Documentacion de Ansible" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentacion de Ansible
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesiones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sesiones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 0 - Requirements del laboratorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 1 - Fundamentos de Infraestructura como Codigo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 2 - Primeros pasos con Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-3/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 3 - Inventarios y variables en Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 4 - Modulos y ejecucion de tareas
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 4 - Modulos y ejecucion de tareas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-validar-el-laboratorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validar el laboratorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-consultar-informacion-con-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Consultar información con setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-crear-un-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Crear un grupo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crear-un-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crear un usuario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-administrar-directorios-con-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Administrar directorios con file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-copiar-archivos-con-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Copiar archivos con copy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-instalar-paquetes-con-apt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Instalar paquetes con apt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-utilizar-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Utilizar package
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-administrar-ssh-con-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Administrar SSH con service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-modulo-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Módulo command
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-modulo-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Módulo shell
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-ejercicio-de-idempotencia-command-vs-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Ejercicio de idempotencia: command vs file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-interpretar-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Interpretar resultados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Interpretar resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provocar-un-error-controlado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provocar un error controlado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provocar-unreachable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provocar unreachable
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 5 - Playbooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-validar-el-laboratorio" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Validar el laboratorio
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-consultar-informacion-con-setup" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Consultar información con setup
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-crear-un-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Crear un grupo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-crear-un-usuario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Crear un usuario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-administrar-directorios-con-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Administrar directorios con file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-copiar-archivos-con-copy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Copiar archivos con copy
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-instalar-paquetes-con-apt" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Instalar paquetes con apt
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-utilizar-package" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Utilizar package
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-administrar-ssh-con-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Administrar SSH con service
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-modulo-command" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Módulo command
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-modulo-shell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Módulo shell
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-ejercicio-de-idempotencia-command-vs-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Ejercicio de idempotencia: command vs file
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-interpretar-resultados" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Interpretar resultados
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="13. Interpretar resultados">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#provocar-un-error-controlado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provocar un error controlado
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#provocar-unreachable" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Provocar unreachable
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-4-modulos-y-ejecucion-de-tareas">Sesión 4 — Módulos y ejecución de tareas</h1>
+<h2 id="objetivo">Objetivo</h2>
+<p>Practicar cómo Ansible ejecuta tareas mediante módulos sobre los dispositivos del laboratorio.</p>
+<p>En esta sesión se trabajará con <code>ping</code>, <code>setup</code>, <code>group</code>, <code>user</code>, <code>file</code>, <code>copy</code>, <code>apt</code>, <code>package</code>, <code>service</code>, <code>command</code> y <code>shell</code>, prestando especial atención a la <strong>idempotencia</strong> y a la interpretación de resultados.</p>
+<blockquote>
+<p>Ejecutar los comandos desde la raíz del proyecto.</p>
+</blockquote>
+<hr />
+<h2 id="1-validar-el-laboratorio">1. Validar el laboratorio</h2>
+<pre><code class="language-bash">docker ps
+ansible-inventory -i inventory/lab.ini --graph
+ansible devices -i inventory/lab.ini -m ping
+</code></pre>
+<hr />
+<h2 id="2-consultar-informacion-con-setup">2. Consultar información con <code>setup</code></h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m setup
+</code></pre>
+<p>Filtrar información de la distribución:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m setup -a &quot;filter=ansible_distribution*&quot;
+</code></pre>
+<p>Consultar memoria:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m setup -a &quot;filter=ansible_memtotal_mb&quot;
+</code></pre>
+<hr />
+<h2 id="3-crear-un-grupo">3. Crear un grupo</h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m group -a &quot;name=devops state=present&quot;
+</code></pre>
+<p>Ejecutar nuevamente el mismo comando y comparar el resultado.</p>
+<hr />
+<h2 id="4-crear-un-usuario">4. Crear un usuario</h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m user -a &quot;name=operador group=devops shell=/bin/bash state=present create_home=yes&quot;
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;id operador&quot;
+</code></pre>
+<p>Volver a ejecutar la creación del usuario y observar si Ansible reporta cambios.</p>
+<hr />
+<h2 id="5-administrar-directorios-con-file">5. Administrar directorios con <code>file</code></h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/opt/ansible-demo state=directory owner=operador group=devops mode=0755&quot;
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;ls -ld /opt/ansible-demo&quot;
+</code></pre>
+<hr />
+<h2 id="6-copiar-archivos-con-copy">6. Copiar archivos con <code>copy</code></h2>
+<p>Crear un archivo en el nodo de control:</p>
+<pre><code class="language-bash">echo &quot;Archivo administrado por Ansible&quot; &gt; mensaje.txt
+</code></pre>
+<p>Copiarlo:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m copy -a &quot;src=mensaje.txt dest=/opt/ansible-demo/mensaje.txt owner=operador group=devops mode=0644&quot;
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /opt/ansible-demo/mensaje.txt&quot;
+</code></pre>
+<p>Ejecutar nuevamente <code>copy</code> y observar la idempotencia.</p>
+<p>Modificar el archivo local:</p>
+<pre><code class="language-bash">echo &quot;Contenido actualizado desde Ansible&quot; &gt; mensaje.txt
+</code></pre>
+<p>Volver a copiarlo y observar qué hosts reportan <code>changed</code>.</p>
+<hr />
+<h2 id="7-instalar-paquetes-con-apt">7. Instalar paquetes con <code>apt</code></h2>
+<p>Actualizar el índice:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m apt -a &quot;update_cache=yes&quot;
+</code></pre>
+<p>Instalar <code>cowsay</code>:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m apt -a &quot;name=cowsay state=present&quot;
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;/usr/games/cowsay Ansible&quot;
+</code></pre>
+<p>Ejecutar nuevamente la instalación y comparar el resultado.</p>
+<hr />
+<h2 id="8-utilizar-package">8. Utilizar <code>package</code></h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m package -a &quot;name=curl state=present&quot;
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;curl --version&quot;
+</code></pre>
+<hr />
+<h2 id="9-administrar-ssh-con-service">9. Administrar SSH con <code>service</code></h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m service -a &quot;name=ssh state=started&quot;
+</code></pre>
+<p>Ejecutar nuevamente y observar el resultado.</p>
+<blockquote>
+<p>Los contenedores Ubuntu del laboratorio pueden no utilizar <code>systemd</code>. Por ello, <code>systemctl</code> no es requisito para completar este ejercicio.</p>
+</blockquote>
+<hr />
+<h2 id="10-modulo-command">10. Módulo <code>command</code></h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;hostname&quot;
+</code></pre>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;uptime&quot;
+</code></pre>
+<p><code>command</code> ejecuta directamente el programa indicado sin pasar por un shell.</p>
+<hr />
+<h2 id="11-modulo-shell">11. Módulo <code>shell</code></h2>
+<p>Ejecutar una tubería:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m shell -a &quot;ps aux | grep sshd&quot;
+</code></pre>
+<p>Utilizar una redirección:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m shell -a &quot;echo 'Creado mediante shell' &gt; /tmp/shell-demo.txt&quot;
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /tmp/shell-demo.txt&quot;
+</code></pre>
+<p>Utilizar <code>shell</code> cuando se necesiten características como:</p>
+<pre><code class="language-text">|   &gt;   &gt;&gt;   &amp;&amp;   *
+</code></pre>
+<p>En caso contrario, preferir <code>command</code> o un módulo específico.</p>
+<hr />
+<h2 id="12-ejercicio-de-idempotencia-command-vs-file">12. Ejercicio de idempotencia: <code>command</code> vs <code>file</code></h2>
+<p>Crear un directorio utilizando <code>command</code>:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m command -a &quot;mkdir /tmp/demo-command&quot;
+</code></pre>
+<p>Ejecutar el mismo comando una segunda vez.</p>
+<p>El comando puede fallar porque el directorio ya existe.</p>
+<p>Eliminarlo:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/tmp/demo-command state=absent&quot;
+</code></pre>
+<p>Ahora crearlo con <code>file</code>:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/tmp/demo-command state=directory&quot;
+</code></pre>
+<p>Ejecutar exactamente el mismo comando una segunda vez.</p>
+<p>Comparar:</p>
+<pre><code class="language-text">command → solicita ejecutar una instrucción.
+file    → solicita alcanzar un estado.
+</code></pre>
+<hr />
+<h2 id="13-interpretar-resultados">13. Interpretar resultados</h2>
+<table>
+<thead>
+<tr>
+<th>Estado</th>
+<th>Significado</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ok</code></td>
+<td>El recurso ya se encuentra en el estado esperado.</td>
+</tr>
+<tr>
+<td><code>changed</code></td>
+<td>Ansible realizó una modificación.</td>
+</tr>
+<tr>
+<td><code>failed</code></td>
+<td>La tarea se ejecutó, pero terminó con error.</td>
+</tr>
+<tr>
+<td><code>unreachable</code></td>
+<td>Ansible no pudo conectarse al host.</td>
+</tr>
+<tr>
+<td><code>skipped</code></td>
+<td>La tarea fue omitida por una condición.</td>
+</tr>
+</tbody>
+</table>
+<p>En comandos ad hoc veremos principalmente <code>SUCCESS</code>, <code>CHANGED</code>, <code>FAILED</code> y <code>UNREACHABLE</code>. <code>skipped</code> y <code>PLAY RECAP</code> serán más visibles al trabajar con Playbooks.</p>
+<h3 id="provocar-un-error-controlado">Provocar un error controlado</h3>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /archivo-que-no-existe&quot;
+</code></pre>
+<p>Identificar el código de retorno y el mensaje del error.</p>
+<h3 id="provocar-unreachable">Provocar <code>unreachable</code></h3>
+<pre><code class="language-bash">ansible device01 -i inventory/lab.ini -m ping -e ansible_port=2299
+</code></pre>
+<p>Comparar <code>FAILED</code> con <code>UNREACHABLE</code>.</p>
+<hr />
+<h1 id="ejercicio-integrador">Ejercicio integrador</h1>
+<p>Preparar todos los dispositivos utilizando comandos ad hoc.</p>
+<p>Cada dispositivo debe tener:</p>
+<ol>
+<li>Grupo <code>devops</code>.</li>
+<li>Usuario <code>operador</code>.</li>
+<li>Directorio <code>/opt/ansible-demo</code>.</li>
+<li>Paquete <code>cowsay</code>.</li>
+<li>Archivo <code>/opt/ansible-demo/mensaje.txt</code>.</li>
+<li>Servicio SSH disponible.</li>
+</ol>
+<p>Después de completar la preparación, volver a ejecutar todos los comandos.</p>
+<h2 id="resultado-esperado">Resultado esperado</h2>
+<p>Las operaciones idempotentes deberían reportar principalmente <code>ok</code> cuando el estado deseado ya se cumple.</p>
+<hr />
+<h1 id="reto-detectar-y-corregir-un-cambio-manual">Reto: detectar y corregir un cambio manual</h1>
+<p>Eliminar manualmente el archivo únicamente en <code>device01</code>:</p>
+<pre><code class="language-bash">docker exec device01 rm /opt/ansible-demo/mensaje.txt
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible device01 -i inventory/lab.ini -m command -a &quot;ls -l /opt/ansible-demo/&quot;
+</code></pre>
+<p>Volver a ejecutar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m copy -a &quot;src=mensaje.txt dest=/opt/ansible-demo/mensaje.txt owner=operador group=devops mode=0644&quot;
+</code></pre>
+<p>Comparar el resultado de <code>device01</code> con <code>device02</code> y <code>device03</code>.</p>
+<hr />
+<h2 id="preguntas-de-cierre">Preguntas de cierre</h2>
+<ol>
+<li>¿Qué diferencia existe entre <code>ok</code> y <code>changed</code>?</li>
+<li>¿Por qué <code>file</code> puede ser preferible a ejecutar <code>mkdir</code> mediante <code>command</code>?</li>
+<li>¿Cuándo utilizaríamos <code>shell</code> en lugar de <code>command</code>?</li>
+<li>¿Qué significa que una operación sea idempotente?</li>
+<li>¿Qué diferencia existe entre <code>failed</code> y <code>unreachable</code>?</li>
+<li>¿Qué ocurrió al modificar manualmente uno de los dispositivos?</li>
+<li>¿Qué ventaja tendría agrupar estos comandos en un Playbook?</li>
+</ol>
+<hr />
+<h2 id="resultado-de-la-sesion">Resultado de la sesión</h2>
+<p>Al finalizar, el participante habrá ejecutado tareas reales utilizando módulos de Ansible, comprobado la idempotencia e interpretado los principales estados de ejecución.</p>
+<p>La siguiente evolución será agrupar estas operaciones como tareas declarativas reutilizables mediante Playbooks.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>

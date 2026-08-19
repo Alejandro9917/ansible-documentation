@@ -1,0 +1,1192 @@
+
+<!doctype html>
+<html lang="es" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Guia y capacitacion de Ansible">
+      
+      
+        <meta name="author" content="Equipo de capacitacion">
+      
+      
+      
+        <link rel="prev" href="../sesion-2/">
+      
+      
+        <link rel="next" href="../sesion-4/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.7.7">
+    
+    
+      
+        <title>Sesion 3 - Inventarios y variables en Ansible - Documentacion de Ansible</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.ec1eaa64.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#sesion-3-inventarios-y-variables-en-ansible" class="md-skip">
+          Saltar a contenido
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Cabecera">
+    <a href="../.." title="Documentacion de Ansible" class="md-header__button md-logo" aria-label="Documentacion de Ansible" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Documentacion de Ansible
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Sesion 3 - Inventarios y variables en Ansible
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Búsqueda" placeholder="Búsqueda" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Buscar">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Limpiar" aria-label="Limpiar" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Inicializando búsqueda
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navegación" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Documentacion de Ansible" class="md-nav__button md-logo" aria-label="Documentacion de Ansible" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Documentacion de Ansible
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Inicio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+    
+    
+      
+        
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2" checked>
+        
+          
+          <label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesiones
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_2_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Sesiones
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Indice
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-0/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 0 - Requirements del laboratorio
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-1/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 1 - Fundamentos de Infraestructura como Codigo
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-2/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 2 - Primeros pasos con Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 3 - Inventarios y variables en Ansible
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 3 - Inventarios y variables en Ansible
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-estructura-esperada-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estructura esperada del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-crear-el-inventario-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Crear el inventario principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-agregar-variables-de-conexion-al-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Agregar variables de conexión al grupo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-probar-la-conectividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Probar la conectividad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-consultar-las-variables-del-inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Consultar las variables del inventario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-variables-especificas-por-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear variables específicas por host
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-utilizar-variables-con-el-modulo-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Utilizar variables con el módulo debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ejercicio-crear-un-archivo-usando-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ejercicio: crear un archivo usando variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-agregar-grupos-de-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Agregar grupos de hosts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-usar-patrones-del-inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Usar patrones del inventario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-crear-un-grupo-con-grupos-hijos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Crear un grupo con grupos hijos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-validacion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Validación final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-resultado-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Resultado esperado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-preguntas-de-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Preguntas de cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-4/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 4 - Modulos y ejecucion de tareas
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../sesion-5/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 5 - Playbooks
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo-de-la-sesion" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo de la sesión
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-estructura-esperada-del-proyecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Estructura esperada del proyecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-crear-el-inventario-principal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Crear el inventario principal
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-agregar-variables-de-conexion-al-grupo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Agregar variables de conexión al grupo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-probar-la-conectividad" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Probar la conectividad
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-consultar-las-variables-del-inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Consultar las variables del inventario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-crear-variables-especificas-por-host" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Crear variables específicas por host
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-utilizar-variables-con-el-modulo-debug" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Utilizar variables con el módulo debug
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-ejercicio-crear-un-archivo-usando-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Ejercicio: crear un archivo usando variables
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-agregar-grupos-de-hosts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Agregar grupos de hosts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-usar-patrones-del-inventario" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Usar patrones del inventario
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-crear-un-grupo-con-grupos-hijos" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. Crear un grupo con grupos hijos
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-validacion-final" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Validación final
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-resultado-esperado" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Resultado esperado
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-preguntas-de-cierre" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Preguntas de cierre
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+
+<h1 id="sesion-3-inventarios-y-variables-en-ansible">Sesión 3 — Inventarios y variables en Ansible</h1>
+<h2 id="objetivo-de-la-sesion">Objetivo de la sesión</h2>
+<p>Integrar al proyecto del laboratorio los ejercicios relacionados con inventarios estáticos, grupos de hosts, variables de conexión, variables por grupo, variables por host y validación del inventario.</p>
+<p>Al finalizar, el proyecto permitirá administrar los dispositivos del laboratorio sin repetir los parámetros de conexión en cada comando.</p>
+<hr />
+<h2 id="1-estructura-esperada-del-proyecto">1. Estructura esperada del proyecto</h2>
+<pre><code class="language-text">ansible-cap/
+├── docker/
+│   └── docker-compose.yml
+├── inventory/
+│   ├── lab.ini
+│   ├── group_vars/
+│   │   └── devices.yml
+│   └── host_vars/
+│       ├── device01.yml
+│       ├── device02.yml
+│       └── device03.yml
+├── ssh/
+│   ├── ansible_lab
+│   └── ansible_lab.pub
+├── mensaje.txt
+├── sesion-1.md
+├── sesion-2.md
+└── sesion-3.md
+</code></pre>
+<p>Crear las carpetas necesarias:</p>
+<pre><code class="language-bash">mkdir -p inventory/group_vars
+mkdir -p inventory/host_vars
+</code></pre>
+<hr />
+<h2 id="2-crear-el-inventario-principal">2. Crear el inventario principal</h2>
+<p>Crear el archivo <code>inventory/lab.ini</code>:</p>
+<pre><code class="language-ini">[devices]
+device01 ansible_host=127.0.0.1 ansible_port=2201
+device02 ansible_host=127.0.0.1 ansible_port=2202
+device03 ansible_host=127.0.0.1 ansible_port=2203
+</code></pre>
+<blockquote>
+<p>Los puertos deben coincidir con los publicados en <code>docker/docker-compose.yml</code>.</p>
+</blockquote>
+<p>Validar el inventario:</p>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --graph
+</code></pre>
+<p>Resultado esperado:</p>
+<pre><code class="language-text">@all:
+  |--@ungrouped:
+  |--@devices:
+  |  |--device01
+  |  |--device02
+  |  |--device03
+</code></pre>
+<hr />
+<h2 id="3-agregar-variables-de-conexion-al-grupo">3. Agregar variables de conexión al grupo</h2>
+<p>Crear el archivo <code>inventory/group_vars/devices.yml</code>:</p>
+<pre><code class="language-yaml">ansible_user: ansible
+ansible_ssh_private_key_file: ssh/ansible_lab
+ansible_python_interpreter: /usr/bin/python3
+ansible_ssh_common_args: &quot;-o StrictHostKeyChecking=no&quot;
+</code></pre>
+<p>Estas variables se aplicarán automáticamente a todos los hosts del grupo <code>devices</code>.</p>
+<blockquote>
+<p>La ruta de la llave privada se interpreta desde la raíz del proyecto. Ejecuta los comandos desde <code>ansible-cap/</code>.</p>
+</blockquote>
+<hr />
+<h2 id="4-probar-la-conectividad">4. Probar la conectividad</h2>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m ping
+</code></pre>
+<p>Resultado esperado:</p>
+<pre><code class="language-text">device01 | SUCCESS =&gt; {
+    &quot;changed&quot;: false,
+    &quot;ping&quot;: &quot;pong&quot;
+}
+</code></pre>
+<p>Si ocurre un error, ejecutar la prueba en modo detallado:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m ping -vvv
+</code></pre>
+<hr />
+<h2 id="5-consultar-las-variables-del-inventario">5. Consultar las variables del inventario</h2>
+<p>Mostrar las variables aplicadas a un host:</p>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --host device01
+</code></pre>
+<p>Mostrar todo el inventario en formato YAML:</p>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --list --yaml
+</code></pre>
+<hr />
+<h2 id="6-crear-variables-especificas-por-host">6. Crear variables específicas por host</h2>
+<p>Crear <code>inventory/host_vars/device01.yml</code>:</p>
+<pre><code class="language-yaml">device_name: dispositivo_principal
+device_role: pruebas
+environment: laboratorio
+</code></pre>
+<p>Crear <code>inventory/host_vars/device02.yml</code>:</p>
+<pre><code class="language-yaml">device_name: dispositivo_secundario
+device_role: desarrollo
+environment: laboratorio
+</code></pre>
+<p>Crear <code>inventory/host_vars/device03.yml</code>:</p>
+<pre><code class="language-yaml">device_name: dispositivo_respaldo
+device_role: validacion
+environment: laboratorio
+</code></pre>
+<p>Validar las variables:</p>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --host device02
+</code></pre>
+<hr />
+<h2 id="7-utilizar-variables-con-el-modulo-debug">7. Utilizar variables con el módulo <code>debug</code></h2>
+<p>Mostrar una variable específica:</p>
+<pre><code class="language-bash">ansible devices \
+  -i inventory/lab.ini \
+  -m debug \
+  -a &quot;var=device_name&quot;
+</code></pre>
+<p>Mostrar un mensaje construido con varias variables:</p>
+<pre><code class="language-bash">ansible devices \
+  -i inventory/lab.ini \
+  -m debug \
+  -a 'msg=&quot;El host {{ inventory_hostname }} se llama {{ device_name }}, tiene el rol {{ device_role }} y pertenece al ambiente {{ environment }}&quot;'
+</code></pre>
+<hr />
+<h2 id="8-ejercicio-crear-un-archivo-usando-variables">8. Ejercicio: crear un archivo usando variables</h2>
+<p>Crear un archivo personalizado en cada dispositivo:</p>
+<pre><code class="language-bash">ansible devices \
+  -i inventory/lab.ini \
+  -b \
+  -m copy \
+  -a 'content=&quot;Host: {{ inventory_hostname }}
+Nombre: {{ device_name }}
+Rol: {{ device_role }}
+Ambiente: {{ environment }}
+&quot; dest=/tmp/informacion_dispositivo.txt owner=ansible group=ansible mode=0644'
+</code></pre>
+<p>Validar el contenido:</p>
+<pre><code class="language-bash">ansible devices \
+  -i inventory/lab.ini \
+  -m command \
+  -a &quot;cat /tmp/informacion_dispositivo.txt&quot;
+</code></pre>
+<hr />
+<h2 id="9-agregar-grupos-de-hosts">9. Agregar grupos de hosts</h2>
+<p>Modificar <code>inventory/lab.ini</code>:</p>
+<pre><code class="language-ini">[devices]
+device01 ansible_host=127.0.0.1 ansible_port=2201
+device02 ansible_host=127.0.0.1 ansible_port=2202
+device03 ansible_host=127.0.0.1 ansible_port=2203
+
+[production]
+device01
+
+[development]
+device02
+device03
+</code></pre>
+<p>Validar la estructura:</p>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --graph
+</code></pre>
+<p>Probar únicamente el grupo <code>development</code>:</p>
+<pre><code class="language-bash">ansible development -i inventory/lab.ini -m ping
+</code></pre>
+<p>Ejecutar un comando sobre <code>production</code>:</p>
+<pre><code class="language-bash">ansible production -i inventory/lab.ini -m command -a &quot;hostname&quot;
+</code></pre>
+<hr />
+<h2 id="10-usar-patrones-del-inventario">10. Usar patrones del inventario</h2>
+<p>Ejecutar sobre todos los dispositivos:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;hostname&quot;
+</code></pre>
+<p>Ejecutar sobre un host:</p>
+<pre><code class="language-bash">ansible device01 -i inventory/lab.ini -m command -a &quot;hostname&quot;
+</code></pre>
+<p>Ejecutar sobre dos hosts:</p>
+<pre><code class="language-bash">ansible 'device01:device02' -i inventory/lab.ini -m ping
+</code></pre>
+<p>Excluir un host:</p>
+<pre><code class="language-bash">ansible 'devices:!device03' -i inventory/lab.ini -m ping
+</code></pre>
+<hr />
+<h2 id="11-crear-un-grupo-con-grupos-hijos">11. Crear un grupo con grupos hijos</h2>
+<p>Dejar el inventario de la siguiente manera:</p>
+<pre><code class="language-ini">[production]
+device01 ansible_host=127.0.0.1 ansible_port=2201
+
+[development]
+device02 ansible_host=127.0.0.1 ansible_port=2202
+device03 ansible_host=127.0.0.1 ansible_port=2203
+
+[devices:children]
+production
+development
+</code></pre>
+<p>Validar:</p>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --graph
+</code></pre>
+<p>Las variables comunes continuarán en:</p>
+<pre><code class="language-text">inventory/group_vars/devices.yml
+</code></pre>
+<hr />
+<h2 id="12-validacion-final">12. Validación final</h2>
+<pre><code class="language-bash">ansible-inventory -i inventory/lab.ini --graph
+</code></pre>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m ping
+</code></pre>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m debug -a &quot;var=device_name&quot;
+</code></pre>
+<pre><code class="language-bash">ansible development -i inventory/lab.ini -m command -a &quot;hostname&quot;
+</code></pre>
+<pre><code class="language-bash">ansible production -i inventory/lab.ini -m command -a &quot;hostname&quot;
+</code></pre>
+<hr />
+<h2 id="13-resultado-esperado">13. Resultado esperado</h2>
+<p>Al finalizar la sesión, el proyecto debe permitir:</p>
+<ul>
+<li>Administrar los tres dispositivos desde un solo inventario.</li>
+<li>Separar hosts por grupos.</li>
+<li>Reutilizar variables de conexión.</li>
+<li>Definir variables específicas para cada dispositivo.</li>
+<li>Ejecutar comandos por host, grupo o patrón.</li>
+<li>Consultar las variables efectivas de cada host.</li>
+<li>Crear archivos personalizados con información del inventario.</li>
+</ul>
+<hr />
+<h2 id="14-preguntas-de-cierre">14. Preguntas de cierre</h2>
+<ol>
+<li>¿Qué diferencia existe entre una variable de grupo y una variable de host?</li>
+<li>¿Qué sucede si una variable está definida en ambos lugares?</li>
+<li>¿Qué ventaja ofrece separar las variables del archivo <code>lab.ini</code>?</li>
+<li>¿Cuándo sería conveniente utilizar un inventario dinámico?</li>
+<li>¿Qué patrón permite ejecutar una tarea en todos los hosts excepto uno?</li>
+</ol>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Volver al principio
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.sections", "navigation.top", "search.suggest", "content.code.copy"], "search": "../../assets/javascripts/workers/search.2c215733.min.js", "tags": null, "translations": {"clipboard.copied": "Copiado al portapapeles", "clipboard.copy": "Copiar al portapapeles", "search.result.more.one": "1 m\u00e1s en esta p\u00e1gina", "search.result.more.other": "# m\u00e1s en esta p\u00e1gina", "search.result.none": "No se encontraron documentos", "search.result.one": "1 documento encontrado", "search.result.other": "# documentos encontrados", "search.result.placeholder": "Teclee para comenzar b\u00fasqueda", "search.result.term.missing": "Falta", "select.version": "Seleccionar versi\u00f3n"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.d7400e89.min.js"></script>
+      
+    
+  </body>
+</html>
