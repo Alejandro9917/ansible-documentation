@@ -13,10 +13,8 @@
       
       
       
-        <link rel="prev" href="../sesion-3/">
+        <link rel="prev" href="../sesion-5/">
       
-      
-        <link rel="next" href="../sesion-5/">
       
       
         
@@ -27,7 +25,7 @@
     
     
       
-        <title>Sesion 4 - Modulos y ejecucion de tareas - Documentacion de Ansible</title>
+        <title>Sesion 6 - Roles y organizacion de proyectos - Documentacion de Ansible</title>
       
     
     
@@ -68,7 +66,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#sesion-4-modulos-y-ejecucion-de-tareas" class="md-skip">
+        <a href="#sesion-6-roles-y-organizacion-de-proyectos" class="md-skip">
           Saltar a contenido
         </a>
       
@@ -104,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Sesion 4 - Modulos y ejecucion de tareas
+              Sesion 6 - Roles y organizacion de proyectos
             
           </span>
         </div>
@@ -420,37 +418,10 @@
                 
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-        <label class="md-nav__link md-nav__link--active" for="__toc">
-          
-  
-  
-  <span class="md-ellipsis">
-    
-  
-    Sesion 4 - Modulos y ejecucion de tareas
-  
-
-    
-  </span>
-  
-  
-
-          <span class="md-nav__icon md-icon"></span>
-        </label>
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../sesion-4/" class="md-nav__link">
         
   
   
@@ -466,208 +437,6 @@
   
 
       </a>
-      
-        
-
-<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
-  
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Tabla de contenidos
-    </label>
-    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#objetivo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Objetivo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#1-validar-el-laboratorio" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        1. Validar el laboratorio
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#2-consultar-informacion-con-setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        2. Consultar información con setup
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#3-crear-un-grupo" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        3. Crear un grupo
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#4-crear-un-usuario" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        4. Crear un usuario
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#5-administrar-directorios-con-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        5. Administrar directorios con file
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#6-copiar-archivos-con-copy" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        6. Copiar archivos con copy
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#7-instalar-paquetes-con-apt" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        7. Instalar paquetes con apt
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#8-utilizar-package" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        8. Utilizar package
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#9-administrar-ssh-con-service" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        9. Administrar SSH con service
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#10-modulo-command" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        10. Módulo command
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#11-modulo-shell" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        11. Módulo shell
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-ejercicio-de-idempotencia-command-vs-file" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        12. Ejercicio de idempotencia: command vs file
-      
-    </span>
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#13-interpretar-resultados" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        13. Interpretar resultados
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="13. Interpretar resultados">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#provocar-un-error-controlado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Provocar un error controlado
-      
-    </span>
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#provocar-unreachable" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Provocar unreachable
-      
-    </span>
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-      
     </li>
   
 
@@ -705,10 +474,37 @@
                 
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../sesion-6/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Sesion 6 - Roles y organizacion de proyectos
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   
@@ -724,6 +520,191 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Tabla de contenidos">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Tabla de contenidos
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#objetivo" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Objetivo
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#1-punto-de-partida" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        1. Punto de partida
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#2-crear-el-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        2. Crear el Role
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#3-definir-valores-por-defecto" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        3. Definir valores por defecto
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#4-mover-las-tasks-al-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        4. Mover las Tasks al Role
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#5-consumir-el-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        5. Consumir el Role
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#6-trabajar-con-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        6. Trabajar con files/
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#7-crear-un-template-jinja2" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        7. Crear un Template Jinja2
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#8-mover-el-handler-al-role" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        8. Mover el Handler al Role
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#9-probar-el-handler" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        9. Probar el Handler
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#10-sobrescribir-defaults" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10. Sobrescribir defaults
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#11-defaults-vs-vars" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        11. defaults vs vars
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#12-ejecutar-desde-siteyml" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        12. Ejecutar desde site.yml
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#13-preparar-los-siguientes-roles" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        13. Preparar los siguientes Roles
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#14-crear-un-role-con-ansible-galaxy" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        14. Crear un Role con Ansible Galaxy
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -774,10 +755,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#1-validar-el-laboratorio" class="md-nav__link">
+  <a href="#1-punto-de-partida" class="md-nav__link">
     <span class="md-ellipsis">
       
-        1. Validar el laboratorio
+        1. Punto de partida
       
     </span>
   </a>
@@ -785,10 +766,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#2-consultar-informacion-con-setup" class="md-nav__link">
+  <a href="#2-crear-el-role" class="md-nav__link">
     <span class="md-ellipsis">
       
-        2. Consultar información con setup
+        2. Crear el Role
       
     </span>
   </a>
@@ -796,10 +777,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#3-crear-un-grupo" class="md-nav__link">
+  <a href="#3-definir-valores-por-defecto" class="md-nav__link">
     <span class="md-ellipsis">
       
-        3. Crear un grupo
+        3. Definir valores por defecto
       
     </span>
   </a>
@@ -807,10 +788,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#4-crear-un-usuario" class="md-nav__link">
+  <a href="#4-mover-las-tasks-al-role" class="md-nav__link">
     <span class="md-ellipsis">
       
-        4. Crear un usuario
+        4. Mover las Tasks al Role
       
     </span>
   </a>
@@ -818,10 +799,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#5-administrar-directorios-con-file" class="md-nav__link">
+  <a href="#5-consumir-el-role" class="md-nav__link">
     <span class="md-ellipsis">
       
-        5. Administrar directorios con file
+        5. Consumir el Role
       
     </span>
   </a>
@@ -829,10 +810,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#6-copiar-archivos-con-copy" class="md-nav__link">
+  <a href="#6-trabajar-con-files" class="md-nav__link">
     <span class="md-ellipsis">
       
-        6. Copiar archivos con copy
+        6. Trabajar con files/
       
     </span>
   </a>
@@ -840,10 +821,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#7-instalar-paquetes-con-apt" class="md-nav__link">
+  <a href="#7-crear-un-template-jinja2" class="md-nav__link">
     <span class="md-ellipsis">
       
-        7. Instalar paquetes con apt
+        7. Crear un Template Jinja2
       
     </span>
   </a>
@@ -851,10 +832,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#8-utilizar-package" class="md-nav__link">
+  <a href="#8-mover-el-handler-al-role" class="md-nav__link">
     <span class="md-ellipsis">
       
-        8. Utilizar package
+        8. Mover el Handler al Role
       
     </span>
   </a>
@@ -862,10 +843,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#9-administrar-ssh-con-service" class="md-nav__link">
+  <a href="#9-probar-el-handler" class="md-nav__link">
     <span class="md-ellipsis">
       
-        9. Administrar SSH con service
+        9. Probar el Handler
       
     </span>
   </a>
@@ -873,10 +854,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#10-modulo-command" class="md-nav__link">
+  <a href="#10-sobrescribir-defaults" class="md-nav__link">
     <span class="md-ellipsis">
       
-        10. Módulo command
+        10. Sobrescribir defaults
       
     </span>
   </a>
@@ -884,10 +865,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#11-modulo-shell" class="md-nav__link">
+  <a href="#11-defaults-vs-vars" class="md-nav__link">
     <span class="md-ellipsis">
       
-        11. Módulo shell
+        11. defaults vs vars
       
     </span>
   </a>
@@ -895,10 +876,10 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#12-ejercicio-de-idempotencia-command-vs-file" class="md-nav__link">
+  <a href="#12-ejecutar-desde-siteyml" class="md-nav__link">
     <span class="md-ellipsis">
       
-        12. Ejercicio de idempotencia: command vs file
+        12. Ejecutar desde site.yml
       
     </span>
   </a>
@@ -906,41 +887,24 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#13-interpretar-resultados" class="md-nav__link">
+  <a href="#13-preparar-los-siguientes-roles" class="md-nav__link">
     <span class="md-ellipsis">
       
-        13. Interpretar resultados
-      
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="13. Interpretar resultados">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#provocar-un-error-controlado" class="md-nav__link">
-    <span class="md-ellipsis">
-      
-        Provocar un error controlado
+        13. Preparar los siguientes Roles
       
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#provocar-unreachable" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#14-crear-un-role-con-ansible-galaxy" class="md-nav__link">
     <span class="md-ellipsis">
       
-        Provocar unreachable
+        14. Crear un Role con Ansible Galaxy
       
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -961,215 +925,374 @@
 
 
 
-<h1 id="sesion-4-modulos-y-ejecucion-de-tareas">Sesión 4 — Módulos y ejecución de tareas</h1>
+<h1 id="sesion-6-roles-y-organizacion-de-proyectos">Sesión 6 — Roles y organización de proyectos</h1>
 <h2 id="objetivo">Objetivo</h2>
-<p>Practicar cómo Ansible ejecuta tareas mediante módulos sobre los dispositivos del laboratorio.</p>
-<p>En esta sesión se trabajará con <code>ping</code>, <code>setup</code>, <code>group</code>, <code>user</code>, <code>file</code>, <code>copy</code>, <code>apt</code>, <code>package</code>, <code>service</code>, <code>command</code> y <code>shell</code>, prestando especial atención a la <strong>idempotencia</strong> y a la interpretación de resultados.</p>
+<p>Reorganizar el laboratorio de las sesiones anteriores mediante <strong>Roles de Ansible</strong>, separando responsabilidades y haciendo reutilizables Tasks, Handlers, Variables, Files y Templates.</p>
+<p>Durante la práctica se trabajará con:</p>
+<ul>
+<li><code>tasks/</code></li>
+<li><code>handlers/</code></li>
+<li><code>files/</code></li>
+<li><code>templates/</code></li>
+<li><code>defaults/</code></li>
+<li><code>vars/</code></li>
+<li>Templates Jinja2</li>
+<li><code>site.yml</code></li>
+<li><code>ansible-galaxy role init</code></li>
+</ul>
 <blockquote>
-<p>Ejecutar los comandos desde la raíz del proyecto.</p>
+<p>Ejecutar los comandos desde la raíz de <code>ansible-cap/</code>.</p>
 </blockquote>
 <hr />
-<h2 id="1-validar-el-laboratorio">1. Validar el laboratorio</h2>
-<pre><code class="language-bash">docker ps
-ansible-inventory -i inventory/lab.ini --graph
-ansible devices -i inventory/lab.ini -m ping
+<h2 id="1-punto-de-partida">1. Punto de partida</h2>
+<p>Actualmente tenemos una estructura similar a:</p>
+<pre><code class="language-text">ansible-cap/
+├── docker/
+├── inventory/
+├── playbooks/
+│   ├── files/
+│   ├── setup_devices.yml
+│   └── site.yml
+└── ssh/
+</code></pre>
+<p>En esta sesión moveremos la implementación de <code>setup_devices.yml</code> a un Role llamado <code>device_agent</code>.</p>
+<hr />
+<h2 id="2-crear-el-role">2. Crear el Role</h2>
+<pre><code class="language-bash">mkdir -p roles/device_agent/{tasks,handlers,files,templates,defaults,vars}
+</code></pre>
+<p>Crear los archivos principales:</p>
+<pre><code class="language-bash">touch roles/device_agent/tasks/main.yml
+touch roles/device_agent/handlers/main.yml
+touch roles/device_agent/defaults/main.yml
+touch roles/device_agent/vars/main.yml
+</code></pre>
+<p>Estructura:</p>
+<pre><code class="language-text">roles/
+└── device_agent/
+    ├── tasks/
+    │   └── main.yml
+    ├── handlers/
+    │   └── main.yml
+    ├── files/
+    ├── templates/
+    ├── defaults/
+    │   └── main.yml
+    └── vars/
+        └── main.yml
 </code></pre>
 <hr />
-<h2 id="2-consultar-informacion-con-setup">2. Consultar información con <code>setup</code></h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m setup
+<h2 id="3-definir-valores-por-defecto">3. Definir valores por defecto</h2>
+<p>Crear <code>roles/device_agent/defaults/main.yml</code>:</p>
+<pre><code class="language-yaml">---
+agent_user: operador
+agent_group: devops
+agent_directory: /opt/ansible-demo
+
+agent_packages:
+  - curl
+  - cowsay
+
+heartbeat_interval: 30
 </code></pre>
-<p>Filtrar información de la distribución:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m setup -a &quot;filter=ansible_distribution*&quot;
-</code></pre>
-<p>Consultar memoria:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m setup -a &quot;filter=ansible_memtotal_mb&quot;
+<p>Estos valores representan configuraciones que quien consume el Role puede sobrescribir.</p>
+<hr />
+<h2 id="4-mover-las-tasks-al-role">4. Mover las Tasks al Role</h2>
+<p>Crear <code>roles/device_agent/tasks/main.yml</code>:</p>
+<pre><code class="language-yaml">---
+- name: Crear grupo del agente
+  ansible.builtin.group:
+    name: &quot;{{ agent_group }}&quot;
+    state: present
+
+- name: Crear usuario del agente
+  ansible.builtin.user:
+    name: &quot;{{ agent_user }}&quot;
+    group: &quot;{{ agent_group }}&quot;
+    shell: /bin/bash
+    create_home: true
+    state: present
+
+- name: Actualizar cache
+  ansible.builtin.apt:
+    update_cache: true
+    cache_valid_time: 3600
+
+- name: Instalar dependencias
+  ansible.builtin.apt:
+    name: &quot;{{ agent_packages }}&quot;
+    state: present
+
+- name: Crear directorio del agente
+  ansible.builtin.file:
+    path: &quot;{{ agent_directory }}&quot;
+    state: directory
+    owner: &quot;{{ agent_user }}&quot;
+    group: &quot;{{ agent_group }}&quot;
+    mode: &quot;0755&quot;
 </code></pre>
 <hr />
-<h2 id="3-crear-un-grupo">3. Crear un grupo</h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m group -a &quot;name=devops state=present&quot;
-</code></pre>
-<p>Ejecutar nuevamente el mismo comando y comparar el resultado.</p>
-<hr />
-<h2 id="4-crear-un-usuario">4. Crear un usuario</h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m user -a &quot;name=operador group=devops shell=/bin/bash state=present create_home=yes&quot;
+<h2 id="5-consumir-el-role">5. Consumir el Role</h2>
+<p>Simplificar <code>playbooks/setup_devices.yml</code>:</p>
+<pre><code class="language-yaml">---
+- name: Preparar dispositivos
+  hosts: devices
+  become: true
+
+  roles:
+    - device_agent
 </code></pre>
 <p>Validar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;id operador&quot;
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/setup_devices.yml --syntax-check
 </code></pre>
-<p>Volver a ejecutar la creación del usuario y observar si Ansible reporta cambios.</p>
+<p>Ejecutar:</p>
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/setup_devices.yml
+</code></pre>
+<p>Ejecutar una segunda vez y comparar el <code>PLAY RECAP</code>.</p>
 <hr />
-<h2 id="5-administrar-directorios-con-file">5. Administrar directorios con <code>file</code></h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/opt/ansible-demo state=directory owner=operador group=devops mode=0755&quot;
+<h2 id="6-trabajar-con-files">6. Trabajar con <code>files/</code></h2>
+<p>Si existe:</p>
+<pre><code class="language-text">playbooks/files/app.conf
 </code></pre>
-<p>Validar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;ls -ld /opt/ansible-demo&quot;
+<p>moverlo:</p>
+<pre><code class="language-bash">mv playbooks/files/app.conf roles/device_agent/files/app.conf
+</code></pre>
+<p>Agregar a <code>tasks/main.yml</code>:</p>
+<pre><code class="language-yaml">- name: Copiar archivo estático
+  ansible.builtin.copy:
+    src: app.conf
+    dest: &quot;{{ agent_directory }}/app.conf&quot;
+    owner: &quot;{{ agent_user }}&quot;
+    group: &quot;{{ agent_group }}&quot;
+    mode: &quot;0644&quot;
+</code></pre>
+<p>Dentro del Role, Ansible busca automáticamente <code>app.conf</code> en <code>files/</code>.</p>
+<hr />
+<h2 id="7-crear-un-template-jinja2">7. Crear un Template Jinja2</h2>
+<p>Crear:</p>
+<pre><code class="language-text">roles/device_agent/templates/agent.conf.j2
+</code></pre>
+<p>Contenido:</p>
+<pre><code class="language-jinja2"># Archivo generado por Ansible
+
+DEVICE_NAME={{ inventory_hostname }}
+DEVICE_USER={{ agent_user }}
+DEVICE_GROUP={{ agent_group }}
+ENVIRONMENT={{ environment | default('laboratorio') }}
+HEARTBEAT_INTERVAL={{ heartbeat_interval }}
+</code></pre>
+<p>Agregar a <code>tasks/main.yml</code>:</p>
+<pre><code class="language-yaml">- name: Generar configuración del agente
+  ansible.builtin.template:
+    src: agent.conf.j2
+    dest: &quot;{{ agent_directory }}/agent.conf&quot;
+    owner: &quot;{{ agent_user }}&quot;
+    group: &quot;{{ agent_group }}&quot;
+    mode: &quot;0644&quot;
+  notify: Registrar cambio de configuración
 </code></pre>
 <hr />
-<h2 id="6-copiar-archivos-con-copy">6. Copiar archivos con <code>copy</code></h2>
-<p>Crear un archivo en el nodo de control:</p>
-<pre><code class="language-bash">echo &quot;Archivo administrado por Ansible&quot; &gt; mensaje.txt
+<h2 id="8-mover-el-handler-al-role">8. Mover el Handler al Role</h2>
+<p>Crear <code>roles/device_agent/handlers/main.yml</code>:</p>
+<pre><code class="language-yaml">---
+- name: Registrar cambio de configuración
+  ansible.builtin.command:
+    cmd: touch /tmp/agent_configuration_changed
 </code></pre>
-<p>Copiarlo:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m copy -a &quot;src=mensaje.txt dest=/opt/ansible-demo/mensaje.txt owner=operador group=devops mode=0644&quot;
+<p>Ejecutar:</p>
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/setup_devices.yml
 </code></pre>
-<p>Validar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /opt/ansible-demo/mensaje.txt&quot;
-</code></pre>
-<p>Ejecutar nuevamente <code>copy</code> y observar la idempotencia.</p>
-<p>Modificar el archivo local:</p>
-<pre><code class="language-bash">echo &quot;Contenido actualizado desde Ansible&quot; &gt; mensaje.txt
-</code></pre>
-<p>Volver a copiarlo y observar qué hosts reportan <code>changed</code>.</p>
-<hr />
-<h2 id="7-instalar-paquetes-con-apt">7. Instalar paquetes con <code>apt</code></h2>
-<p>Actualizar el índice:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m apt -a &quot;update_cache=yes&quot;
-</code></pre>
-<p>Instalar <code>cowsay</code>:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m apt -a &quot;name=cowsay state=present&quot;
-</code></pre>
-<p>Validar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;/usr/games/cowsay Ansible&quot;
-</code></pre>
-<p>Ejecutar nuevamente la instalación y comparar el resultado.</p>
-<hr />
-<h2 id="8-utilizar-package">8. Utilizar <code>package</code></h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m package -a &quot;name=curl state=present&quot;
-</code></pre>
-<p>Validar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;curl --version&quot;
+<p>Validar la configuración generada:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /opt/ansible-demo/agent.conf&quot;
 </code></pre>
 <hr />
-<h2 id="9-administrar-ssh-con-service">9. Administrar SSH con <code>service</code></h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m service -a &quot;name=ssh state=started&quot;
+<h2 id="9-probar-el-handler">9. Probar el Handler</h2>
+<p>Eliminar el archivo utilizado como evidencia:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/tmp/agent_configuration_changed state=absent&quot;
 </code></pre>
-<p>Ejecutar nuevamente y observar el resultado.</p>
-<blockquote>
-<p>Los contenedores Ubuntu del laboratorio pueden no utilizar <code>systemd</code>. Por ello, <code>systemctl</code> no es requisito para completar este ejercicio.</p>
-</blockquote>
+<p>Ejecutar sin cambiar el Template:</p>
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/setup_devices.yml
+</code></pre>
+<p>El Handler no debería ejecutarse.</p>
+<p>Ahora cambiar en <code>defaults/main.yml</code>:</p>
+<pre><code class="language-yaml">heartbeat_interval: 60
+</code></pre>
+<p>Ejecutar nuevamente.</p>
+<p>El flujo esperado es:</p>
+<pre><code class="language-text">Template cambia
+      ↓
+    notify
+      ↓
+   Handler
+</code></pre>
 <hr />
-<h2 id="10-modulo-command">10. Módulo <code>command</code></h2>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;hostname&quot;
+<h2 id="10-sobrescribir-defaults">10. Sobrescribir <code>defaults</code></h2>
+<p>En <code>inventory/host_vars/device01.yml</code> agregar:</p>
+<pre><code class="language-yaml">heartbeat_interval: 10
 </code></pre>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;uptime&quot;
+<p>Ejecutar:</p>
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/setup_devices.yml
 </code></pre>
-<p><code>command</code> ejecuta directamente el programa indicado sin pasar por un shell.</p>
-<hr />
-<h2 id="11-modulo-shell">11. Módulo <code>shell</code></h2>
-<p>Ejecutar una tubería:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m shell -a &quot;ps aux | grep sshd&quot;
-</code></pre>
-<p>Utilizar una redirección:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m shell -a &quot;echo 'Creado mediante shell' &gt; /tmp/shell-demo.txt&quot;
-</code></pre>
-<p>Validar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /tmp/shell-demo.txt&quot;
-</code></pre>
-<p>Utilizar <code>shell</code> cuando se necesiten características como:</p>
-<pre><code class="language-text">|   &gt;   &gt;&gt;   &amp;&amp;   *
-</code></pre>
-<p>En caso contrario, preferir <code>command</code> o un módulo específico.</p>
-<hr />
-<h2 id="12-ejercicio-de-idempotencia-command-vs-file">12. Ejercicio de idempotencia: <code>command</code> vs <code>file</code></h2>
-<p>Crear un directorio utilizando <code>command</code>:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m command -a &quot;mkdir /tmp/demo-command&quot;
-</code></pre>
-<p>Ejecutar el mismo comando una segunda vez.</p>
-<p>El comando puede fallar porque el directorio ya existe.</p>
-<p>Eliminarlo:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/tmp/demo-command state=absent&quot;
-</code></pre>
-<p>Ahora crearlo con <code>file</code>:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m file -a &quot;path=/tmp/demo-command state=directory&quot;
-</code></pre>
-<p>Ejecutar exactamente el mismo comando una segunda vez.</p>
 <p>Comparar:</p>
-<pre><code class="language-text">command → solicita ejecutar una instrucción.
-file    → solicita alcanzar un estado.
+<pre><code class="language-bash">ansible device01 -i inventory/lab.ini -m command -a &quot;cat /opt/ansible-demo/agent.conf&quot;
+</code></pre>
+<pre><code class="language-bash">ansible device02 -i inventory/lab.ini -m command -a &quot;cat /opt/ansible-demo/agent.conf&quot;
+</code></pre>
+<p>El mismo Role debe generar configuraciones distintas.</p>
+<hr />
+<h2 id="11-defaults-vs-vars">11. <code>defaults</code> vs <code>vars</code></h2>
+<p>Crear <code>roles/device_agent/vars/main.yml</code>:</p>
+<pre><code class="language-yaml">---
+agent_config_filename: agent.conf
+</code></pre>
+<p>Modificar la Task del Template:</p>
+<pre><code class="language-yaml">- name: Generar configuración del agente
+  ansible.builtin.template:
+    src: agent.conf.j2
+    dest: &quot;{{ agent_directory }}/{{ agent_config_filename }}&quot;
+    owner: &quot;{{ agent_user }}&quot;
+    group: &quot;{{ agent_group }}&quot;
+    mode: &quot;0644&quot;
+  notify: Registrar cambio de configuración
+</code></pre>
+<p>Regla práctica:</p>
+<pre><code class="language-text">defaults/
+├── Valores configurables.
+├── Valores que pueden cambiar por ambiente.
+└── Prioridad baja.
+
+vars/
+├── Variables internas del Role.
+├── Valores que normalmente no se modifican.
+└── Mayor prioridad que defaults.
 </code></pre>
 <hr />
-<h2 id="13-interpretar-resultados">13. Interpretar resultados</h2>
-<table>
-<thead>
-<tr>
-<th>Estado</th>
-<th>Significado</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>ok</code></td>
-<td>El recurso ya se encuentra en el estado esperado.</td>
-</tr>
-<tr>
-<td><code>changed</code></td>
-<td>Ansible realizó una modificación.</td>
-</tr>
-<tr>
-<td><code>failed</code></td>
-<td>La tarea se ejecutó, pero terminó con error.</td>
-</tr>
-<tr>
-<td><code>unreachable</code></td>
-<td>Ansible no pudo conectarse al host.</td>
-</tr>
-<tr>
-<td><code>skipped</code></td>
-<td>La tarea fue omitida por una condición.</td>
-</tr>
-</tbody>
-</table>
-<p>En comandos ad hoc veremos principalmente <code>SUCCESS</code>, <code>CHANGED</code>, <code>FAILED</code> y <code>UNREACHABLE</code>. <code>skipped</code> y <code>PLAY RECAP</code> serán más visibles al trabajar con Playbooks.</p>
-<h3 id="provocar-un-error-controlado">Provocar un error controlado</h3>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /archivo-que-no-existe&quot;
+<h2 id="12-ejecutar-desde-siteyml">12. Ejecutar desde <code>site.yml</code></h2>
+<p><code>playbooks/site.yml</code>:</p>
+<pre><code class="language-yaml">---
+- import_playbook: setup_devices.yml
 </code></pre>
-<p>Identificar el código de retorno y el mensaje del error.</p>
-<h3 id="provocar-unreachable">Provocar <code>unreachable</code></h3>
-<pre><code class="language-bash">ansible device01 -i inventory/lab.ini -m ping -e ansible_port=2299
+<p>Ejecutar:</p>
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/site.yml
 </code></pre>
-<p>Comparar <code>FAILED</code> con <code>UNREACHABLE</code>.</p>
+<p>La organización queda:</p>
+<pre><code class="language-text">site.yml
+   │
+   ▼
+setup_devices.yml
+   │
+   ▼
+device_agent
+   │
+   ├── defaults
+   ├── vars
+   ├── tasks
+   ├── templates
+   ├── files
+   └── handlers
+</code></pre>
+<hr />
+<h2 id="13-preparar-los-siguientes-roles">13. Preparar los siguientes Roles</h2>
+<p>Crear las estructuras que posteriormente utilizará el caso de estudio:</p>
+<pre><code class="language-bash">mkdir -p roles/redis/{tasks,handlers,files,templates,defaults,vars}
+mkdir -p roles/monitoring/{tasks,handlers,files,templates,defaults,vars}
+</code></pre>
+<p>No es necesario implementar todavía Redis o Monitoring.</p>
+<p>La estructura objetivo será:</p>
+<pre><code class="language-text">roles/
+├── device_agent/
+├── redis/
+└── monitoring/
+</code></pre>
+<hr />
+<h2 id="14-crear-un-role-con-ansible-galaxy">14. Crear un Role con Ansible Galaxy</h2>
+<p>Después de construir el primer Role manualmente, comparar con el generador de Ansible:</p>
+<pre><code class="language-bash">ansible-galaxy role init roles/demo_role
+</code></pre>
+<p>Visualizar:</p>
+<pre><code class="language-bash">tree roles/demo_role
+</code></pre>
+<p>Después de revisar:</p>
+<pre><code class="language-bash">rm -rf roles/demo_role
+</code></pre>
 <hr />
 <h1 id="ejercicio-integrador">Ejercicio integrador</h1>
-<p>Preparar todos los dispositivos utilizando comandos ad hoc.</p>
-<p>Cada dispositivo debe tener:</p>
+<p>Reorganizar completamente la automatización de los dispositivos.</p>
+<p>El resultado debe cumplir:</p>
 <ol>
-<li>Grupo <code>devops</code>.</li>
-<li>Usuario <code>operador</code>.</li>
-<li>Directorio <code>/opt/ansible-demo</code>.</li>
-<li>Paquete <code>cowsay</code>.</li>
-<li>Archivo <code>/opt/ansible-demo/mensaje.txt</code>.</li>
-<li>Servicio SSH disponible.</li>
+<li><code>setup_devices.yml</code> consume <code>device_agent</code>.</li>
+<li>Las Tasks están en <code>roles/device_agent/tasks/main.yml</code>.</li>
+<li>Los Handlers están en <code>handlers/main.yml</code>.</li>
+<li>Los valores configurables están en <code>defaults/main.yml</code>.</li>
+<li>Las variables internas están en <code>vars/main.yml</code>.</li>
+<li>La configuración se genera con un Template Jinja2.</li>
+<li><code>device01</code> utiliza un <code>heartbeat_interval</code> diferente.</li>
+<li>Un cambio en el Template ejecuta el Handler.</li>
+<li>Una segunda ejecución sin cambios demuestra idempotencia.</li>
+<li><code>site.yml</code> continúa siendo el punto de entrada.</li>
 </ol>
-<p>Después de completar la preparación, volver a ejecutar todos los comandos.</p>
-<h2 id="resultado-esperado">Resultado esperado</h2>
-<p>Las operaciones idempotentes deberían reportar principalmente <code>ok</code> cuando el estado deseado ya se cumple.</p>
+<p>Ejecutar:</p>
+<pre><code class="language-bash">ansible-playbook -i inventory/lab.ini playbooks/site.yml
+</code></pre>
 <hr />
-<h1 id="reto-detectar-y-corregir-un-cambio-manual">Reto: detectar y corregir un cambio manual</h1>
-<p>Eliminar manualmente el archivo únicamente en <code>device01</code>:</p>
-<pre><code class="language-bash">docker exec device01 rm /opt/ansible-demo/mensaje.txt
+<h1 id="reto">Reto</h1>
+<p>Agregar en <code>defaults/main.yml</code>:</p>
+<pre><code class="language-yaml">agent_log_level: INFO
 </code></pre>
-<p>Validar:</p>
-<pre><code class="language-bash">ansible device01 -i inventory/lab.ini -m command -a &quot;ls -l /opt/ansible-demo/&quot;
+<p>Agregar a <code>agent.conf.j2</code>:</p>
+<pre><code class="language-jinja2">LOG_LEVEL={{ agent_log_level }}
 </code></pre>
-<p>Volver a ejecutar:</p>
-<pre><code class="language-bash">ansible devices -i inventory/lab.ini -b -m copy -a &quot;src=mensaje.txt dest=/opt/ansible-demo/mensaje.txt owner=operador group=devops mode=0644&quot;
+<p>Configurar solamente <code>device03</code> con:</p>
+<pre><code class="language-yaml">agent_log_level: DEBUG
 </code></pre>
-<p>Comparar el resultado de <code>device01</code> con <code>device02</code> y <code>device03</code>.</p>
+<p>Ejecutar el proyecto y validar:</p>
+<pre><code class="language-bash">ansible devices -i inventory/lab.ini -m command -a &quot;cat /opt/ansible-demo/agent.conf&quot;
+</code></pre>
+<p>El mismo Role debe producir configuraciones distintas dependiendo de las variables de cada host.</p>
+<hr />
+<h2 id="estructura-final-esperada">Estructura final esperada</h2>
+<pre><code class="language-text">ansible-cap/
+├── docker/
+├── inventory/
+│   ├── lab.ini
+│   ├── group_vars/
+│   └── host_vars/
+├── playbooks/
+│   ├── setup_devices.yml
+│   └── site.yml
+├── roles/
+│   ├── device_agent/
+│   │   ├── tasks/
+│   │   │   └── main.yml
+│   │   ├── handlers/
+│   │   │   └── main.yml
+│   │   ├── files/
+│   │   ├── templates/
+│   │   │   └── agent.conf.j2
+│   │   ├── defaults/
+│   │   │   └── main.yml
+│   │   └── vars/
+│   │       └── main.yml
+│   ├── redis/
+│   └── monitoring/
+└── ssh/
+</code></pre>
 <hr />
 <h2 id="preguntas-de-cierre">Preguntas de cierre</h2>
 <ol>
-<li>¿Qué diferencia existe entre <code>ok</code> y <code>changed</code>?</li>
-<li>¿Por qué <code>file</code> puede ser preferible a ejecutar <code>mkdir</code> mediante <code>command</code>?</li>
-<li>¿Cuándo utilizaríamos <code>shell</code> en lugar de <code>command</code>?</li>
-<li>¿Qué significa que una operación sea idempotente?</li>
-<li>¿Qué diferencia existe entre <code>failed</code> y <code>unreachable</code>?</li>
-<li>¿Qué ocurrió al modificar manualmente uno de los dispositivos?</li>
-<li>¿Qué ventaja tendría agrupar estos comandos en un Playbook?</li>
+<li>¿Qué es un Role?</li>
+<li>¿Qué problema resuelven los Roles?</li>
+<li>¿Dónde se almacenan las Tasks?</li>
+<li>¿Dónde se almacenan los Handlers?</li>
+<li>¿Cuál es la diferencia entre <code>files/</code> y <code>templates/</code>?</li>
+<li>¿Cuál es la diferencia entre <code>defaults/</code> y <code>vars/</code>?</li>
+<li>¿Qué ventaja ofrece Jinja2?</li>
+<li>¿Cómo puede el mismo Role producir configuraciones distintas?</li>
+<li>¿Qué función cumple <code>site.yml</code>?</li>
+<li>¿Qué ventajas ofrece reutilizar Roles?</li>
 </ol>
 <hr />
-<h2 id="resultado-de-la-sesion">Resultado de la sesión</h2>
-<p>Al finalizar, el participante habrá ejecutado tareas reales utilizando módulos de Ansible, comprobado la idempotencia e interpretado los principales estados de ejecución.</p>
-<p>La siguiente evolución será agrupar estas operaciones como tareas declarativas reutilizables mediante Playbooks.</p>
+<h2 id="resultado-esperado">Resultado esperado</h2>
+<p>Al finalizar, el proyecto habrá evolucionado de Playbooks con múltiples responsabilidades a una estructura modular basada en Roles, preparada para incorporar posteriormente los Roles <code>redis</code> y <code>monitoring</code>.</p>
 
 
 
