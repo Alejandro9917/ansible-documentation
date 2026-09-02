@@ -18,3 +18,4 @@ Proyecto inicializado. El contenido de la guia se agregara en las siguientes tar
 - [Sesion 3 - Inventarios y variables en Ansible](sesiones/sesion-3.md)
 - [Sesion 4 - Modulos y ejecucion de tareas](sesiones/sesion-4.md)
 - [Sesion 5 - Playbooks](sesiones/sesion-5.md)
+- [Sesion 6 - Roles y organizacion de proyectos](sesiones/sesion-6.md)

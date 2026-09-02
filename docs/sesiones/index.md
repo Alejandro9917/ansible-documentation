@@ -10,3 +10,4 @@ Material de la capacitacion organizado por sesiones.
 - [Sesion 3 - Inventarios y variables en Ansible](sesion-3.md)
 - [Sesion 4 - Modulos y ejecucion de tareas](sesion-4.md)
 - [Sesion 5 - Playbooks](sesion-5.md)
+- [Sesion 6 - Roles y organizacion de proyectos](sesion-6.md)
